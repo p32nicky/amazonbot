@@ -1,4 +1,4 @@
-name: Amazon Deal Bot
+name: Amazon Deal Bot with GitHub Pages
 
 on:
   schedule:
@@ -29,16 +29,21 @@ jobs:
         pip install requests beautifulsoup4
         
     - name: Run Amazon Deal Bot
-      env:
-        PASTEBIN_API_KEY: ${{ secrets.PASTEBIN_API_KEY }}
-        PASTEBIN_PASTE_KEY: ${{ secrets.PASTEBIN_PASTE_KEY }}
       run: |
-        python amazon_deals_github_persistent.py --api-key "$PASTEBIN_API_KEY" --paste-key "$PASTEBIN_PASTE_KEY"
+        python amazon_deals_github_pages.py
         
     - name: Commit and push if there are changes
       run: |
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
-        git add amazon_deals_latest.json amazon_deals_latest.csv
+        git add docs/
         git commit -m "Update Amazon deals [skip ci]" || echo "No changes to commit"
         git push || echo "Nothing to push"
+        
+    - name: Display GitHub Pages URL
+      run: |
+        echo "GitHub Pages URL for your Amazon Deals CSV:"
+        echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/amazon_deals.csv"
+        echo ""
+        echo "To use this in Google Sheets, paste this formula in cell A1:"
+        echo "=IMPORTDATA(\"https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/amazon_deals.csv\")"
