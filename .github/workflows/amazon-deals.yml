@@ -1,33 +1,6 @@
-name: Amazon Deal Bot
-
-on:
-  schedule:
-    - cron: '*/30 * * * *'
-  workflow_dispatch:
-
-jobs:
-  find-deals:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
-    - run: pip install requests beautifulsoup4
-    - name: Run Amazon Deal Bot
-      env:
-        PASTEBIN_API_KEY: ${{ secrets.PASTEBIN_API_KEY }}
-      run: |
-        python amazon_deals_github_fixed.py --api-key "$PASTEBIN_API_KEY"
-    - name: Commit changes
-      run: |
-        git config --global user.name 'GitHub Action'
-        git config --global user.email 'action@github.com'
-        git add .
-        git commit -m "Update deals" || echo "No changes to commit"
-        git push || echo "Nothing to push"
+- name: Run Amazon Deal Bot
+  env:
+    PASTEBIN_API_KEY: ${{ secrets.PASTEBIN_API_KEY }}
+    PASTEBIN_PASTE_KEY: ${{ secrets.PASTEBIN_PASTE_KEY }}
+  run: |
+    python amazon_deals_github_fixed.py --api-key "$PASTEBIN_API_KEY" --paste-key "$PASTEBIN_PASTE_KEY"
