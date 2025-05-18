@@ -2,9 +2,8 @@ name: Amazon Deal Bot
 
 on:
   schedule:
-    # Run every 30 minutes
     - cron: '*/30 * * * *'
-  workflow_dispatch:  # Allows manual triggering
+  workflow_dispatch:
 
 jobs:
   find-deals:
@@ -13,29 +12,22 @@ jobs:
       contents: write
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-        
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install requests beautifulsoup4
-        
+    - run: pip install requests beautifulsoup4
     - name: Run Amazon Deal Bot
       env:
         PASTEBIN_API_KEY: ${{ secrets.PASTEBIN_API_KEY }}
       run: |
-        python amazon_deals_github.py --api-key "$PASTEBIN_API_KEY"
-        
-    - name: Commit and push if there are changes
+        python amazon_deals_github_fixed.py --api-key "$PASTEBIN_API_KEY"
+    - name: Commit changes
       run: |
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
-        git add amazon_deals_latest.json amazon_deals_latest.csv paste_key.txt
-        git commit -m "Update Amazon deals [skip ci]" || echo "No changes to commit"
-        git push
+        git add .
+        git commit -m "Update deals" || echo "No changes to commit"
+        git push || echo "Nothing to push"
