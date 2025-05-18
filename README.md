@@ -1,0 +1,2 @@
+# amazonbot
+amazon deals bot
