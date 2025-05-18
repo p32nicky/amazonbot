@@ -655,8 +655,10 @@ def main():
         title = f"Amazon Deals {MIN_DISCOUNT_PERCENT}% Off or More - Updated {datetime.now().strftime('%Y-%m-%d %H:%M')}"
         
         # If we already have a paste key, update the same paste
-        update_existing = paste_key is not None
-        pastebin_url = pastebin_uploader.upload_deals_as_csv(deals, title=title, update_existing=update_existing)
+        # Always create a new paste for now (GitHub Actions environment)
+update_existing = False
+pastebin_url = pastebin_uploader.upload_deals_as_csv(deals, title=title, update_existing=update_existing)
+
         
         if pastebin_url:
             logger.info(f"Successfully uploaded deals to Pastebin: {pastebin_url}")
