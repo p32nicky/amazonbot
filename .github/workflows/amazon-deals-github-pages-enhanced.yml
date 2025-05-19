@@ -2,9 +2,8 @@ name: Amazon Deal Bot with GitHub Pages (Enhanced)
 
 on:
   schedule:
-    # Run every 30 minutes
     - cron: '*/30 * * * *'
-  workflow_dispatch:  # Allows manual triggering
+  workflow_dispatch:
 
 jobs:
   find-deals:
@@ -26,9 +25,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests beautifulsoup4
         
+    - name: Make script executable
+      run: chmod +x amazon_deals_github_pages_enhanced.py
+        
     - name: Run Enhanced Amazon Deal Bot
       run: |
-        python amazon_deals_github_pages_enhanced.py
+        python amazon_deals_github_pages_enhanced.py --simulate
         
     - name: Commit and push changes
       run: |
