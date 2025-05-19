@@ -31,7 +31,7 @@ logger = logging.getLogger("amazon_deals_github")
 # Constants
 AFFILIATE_TAG = "nicdav09-20"
 MIN_DISCOUNT_PERCENT = 50
-MAX_ITEMS = 500
+MAX_ITEMS = 100
 
 class AmazonDealFinder:
     """Class to find Amazon deals with significant discounts."""
