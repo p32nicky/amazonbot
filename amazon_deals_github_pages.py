@@ -31,7 +31,7 @@ logger = logging.getLogger("amazon_deals_github")
 # Constants
 AFFILIATE_TAG = "nicdav09-20"
 MIN_DISCOUNT_PERCENT = 50
-MAX_ITEMS = 100
+MAX_ITEMS = 25
 
 class AmazonDealFinder:
     """Class to find Amazon deals with significant discounts."""
@@ -224,47 +224,6 @@ class AmazonDealFinder:
             "lightning deals",
             "sale items",
             "price drop"
-            "daily deals",
-"massive savings",
-"today’s top deals",
-"limited-time offers",
-"bargain finds",
-"hot deals now",
-"markdown specials",
-"instant savings",
-"doorbuster deals",
-"flash sale",
-"exclusive discounts",
-"save big today",
-"can’t-miss deals",
-"best price today",
-"up to 70% off",
-"limited stock deals",
-"lowest price alert",
-"mega discount",
-"end-of-season sale",
-"final markdowns"
-"daily deals",
-"massive savings",
-"today’s top deals",
-"limited-time offers",
-"bargain finds",
-"hot deals now",
-"markdown specials",
-"instant savings",
-"doorbuster deals",
-"flash sale",
-"exclusive discounts",
-"save big today",
-"can’t-miss deals",
-"best price today",
-"up to 70% off",
-"limited stock deals",
-"lowest price alert",
-"mega discount",
-"end-of-season sale",
-"final markdowns"
-
         ]
         
         random.shuffle(search_queries)
