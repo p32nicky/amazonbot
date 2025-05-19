@@ -217,15 +217,24 @@ class AmazonDealFinder:
         deals = []
         
         # Search queries likely to return discounted items
-        search_queries = [
-            "deals of the day",
-            "clearance sale",
-            "discount 50 percent or more",
-            "lightning deals",
-            "sale items",
-            "price drop"
-        ]
-        
+     search_queries = [
+    "deals of the day",
+    "clearance sale",
+    "discount 50 percent or more",
+    "lightning deals",
+    "sale items",
+    "price drop",
+    "flash sale",
+    "bargain finds",
+    "today's special",
+    "limited time offer",
+    "huge discount",
+    "clearance items",
+    "big savings",
+    "special offer",
+    "deal of the week"
+]
+
         random.shuffle(search_queries)
         
         for query in search_queries:
